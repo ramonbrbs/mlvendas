@@ -1,0 +1,10 @@
+Options -Indexes
+DirectoryIndex /page/portal.php index.php index.php3 index.html index.htm
+Allow from all
+<IfModule mod_rewrite.c>
+   RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule . index.php [L]
+</IfModule>
