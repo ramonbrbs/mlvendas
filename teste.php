@@ -1,7 +1,12 @@
 <?php
 
-require("Framework/Controller.php");
+require(__DIR__.'/Entity/User.php');
 
-$c = new Controller();
+$user = new User();
+$user->name = "Ramon Barbosa";
+$user->plainPassword = '123456';
+$user->login = 'ramonflmr';
+$user->email = 'ramonflmr@gmail.com';
 
-var_dump(call_user_func_array(array($c, 'getname'), array()));
+
+var_dump($user->register());

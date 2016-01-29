@@ -14,8 +14,19 @@ class Controller{
     function __construct(){
         $this->smarty = new Smarty;
         $this->setupSmarty();
+        $this->loadStatic();
     }
     
+    
+    private function assignPostVars(){
+        foreach($_POST as $k => $v){
+            $this->smarty->assign('_post_'.$k, $v);
+        }
+    }
+    
+    private function loadStatic(){
+        $this->smarty->assign('static', STATIC_PATH);
+    }
     
     private function setupSmarty(){
         $this->smarty->setTemplateDir(TEMPLATE_DIR);
@@ -37,6 +48,7 @@ class Controller{
     }
     
     public function Render(){
+        $this->assignPostVars();
         $this->fetchFromContext();
         $this->convertRealPathViewFile();
         $this->smarty->display($this->ViewFile.'.tpl');
@@ -44,5 +56,11 @@ class Controller{
     
     public function getname(){
         return "teste";
+    }
+    
+    private function redirectTo($page, $method = null, $args=null){
+        if (empty($method)){
+            header('Location: '.ROOT_URL.$link);
+        }
     }
 }

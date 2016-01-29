@@ -9,6 +9,9 @@ class Index extends Controller{
     }
     
     function Index(){
+        if(!empty($_POST)){
+            
+        }
         $this->Render();
     }
     
