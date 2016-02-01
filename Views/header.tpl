@@ -19,6 +19,7 @@
       <a class="navbar-brand" href="#">Envios ML</a>
     </div>
 
+    {if isset($SESSION_USER)}
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
         <li class="active"><a href="#">Fila de Envios <span class="sr-only">(current)</span></a></li>
@@ -37,17 +38,13 @@
         </li>
       </ul>
       
-      {*
-      <form class="navbar-form navbar-left" role="search">
-        <div class="form-group">
-          <input type="text" class="form-control" placeholder="Search">
-        </div>
-        <button type="submit" class="btn btn-default">Submit</button>
-      </form>*}
+      
       <ul class="nav navbar-nav navbar-right">
         <li><a href="#">Sair</a></li>
       </ul>
     </div>
+    {/if}
+    
   </div>
 </nav>
 

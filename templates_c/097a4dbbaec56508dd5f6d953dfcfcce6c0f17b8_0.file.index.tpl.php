@@ -1,17 +1,17 @@
 <?php
-/* Smarty version 3.1.29, created on 2016-01-29 02:58:25
+/* Smarty version 3.1.29, created on 2016-01-29 17:43:03
   from "/home/ubuntu/workspace/Views/index.tpl" */
 
 if ($_smarty_tpl->smarty->ext->_validateCompiled->decodeProperties($_smarty_tpl, array (
   'has_nocache_code' => false,
   'version' => '3.1.29',
-  'unifunc' => 'content_56aad551bca0d8_38880703',
+  'unifunc' => 'content_56aba4a73cc329_35704698',
   'file_dependency' => 
   array (
     '097a4dbbaec56508dd5f6d953dfcfcce6c0f17b8' => 
     array (
       0 => '/home/ubuntu/workspace/Views/index.tpl',
-      1 => 1454036294,
+      1 => 1454089379,
       2 => 'file',
     ),
   ),
@@ -21,7 +21,7 @@ if ($_smarty_tpl->smarty->ext->_validateCompiled->decodeProperties($_smarty_tpl,
     'file:footer.tpl' => 1,
   ),
 ),false)) {
-function content_56aad551bca0d8_38880703 ($_smarty_tpl) {
+function content_56aba4a73cc329_35704698 ($_smarty_tpl) {
 $_smarty_tpl->smarty->ext->_subtemplate->render($_smarty_tpl, "file:header.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);
 ?>
 
@@ -31,8 +31,13 @@ $_smarty_tpl->smarty->ext->_subtemplate->render($_smarty_tpl, "file:header.tpl",
 
       <form class="form-signin" method='POST' action=''>
         <h2 class="form-signin-heading">LOGIN</h2>
+        <?php if (isset($_smarty_tpl->tpl_vars['auth_failed']->value)) {?>
+        <div class="alert alert-danger">
+          Senha ou usuário incorreto(s).
+        </div>
+        <?php }?>
         <label for="login" class="sr-only">Nome de Usuário</label>
-        <input type="text" id="login" name='login' class="form-control" placeholder="Nome de Usuário" value='<?php echo $_smarty_tpl->tpl_vars['_post_login']->value;?>
+        <input type="text" id="login" name='login' class="form-control" placeholder="Nome de Usuário" value='<?php echo isset($_smarty_tpl->tpl_vars['_post_login']->value) ? $_smarty_tpl->tpl_vars['_post_login']->value : '';?>
 ' required autofocus>
         <label for="plainPassword" class="sr-only">Senha</label>
         <input type="password" name='plainPassword' id="plainPassword" class="form-control" placeholder="Senha" required>

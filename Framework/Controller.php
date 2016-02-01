@@ -2,7 +2,7 @@
 
 require_once(__DIR__ . '/../settings.php');
 require_once(__DIR__ . '/../Libs/Smarty/Smarty.class.php');
-
+require_once(__DIR__.'/Constant.php');
 
 class Controller{
     
@@ -13,6 +13,7 @@ class Controller{
     
     function __construct(){
         $this->smarty = new Smarty;
+        $this->Context = array();
         $this->setupSmarty();
         $this->loadStatic();
     }
@@ -35,16 +36,20 @@ class Controller{
     
     private function fetchFromContext(){
         if(!empty($this->Context)){
-            foreach ($this->$Context as $key => $value) {
+            foreach ($this->Context as $key => $value) {
                 $this->smarty->assign($key, $value);
             }
+        }
+        
+        if(isset($_SESSION[SESSION_USER])){
+            $this->smarty->assign(SESSION_USER, $_SESSION[SESSION_USER]);
         }
         
     }
     
     //Replace doubleunder for /
     private function convertRealPathViewFile(){
-        $ViewFile = str_replace('__','/',$ViewFile);
+        $this->ViewFile = str_replace('__','/',$this->ViewFile);
     }
     
     public function Render(){
@@ -58,9 +63,9 @@ class Controller{
         return "teste";
     }
     
-    private function redirectTo($page, $method = null, $args=null){
+    protected function redirectTo($page, $method = null, $args=null){
         if (empty($method)){
-            header('Location: '.ROOT_URL.$link);
+            header('Location: '.ROOT_URL.$page);
         }
     }
 }

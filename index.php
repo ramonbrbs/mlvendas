@@ -1,7 +1,7 @@
 <?php
 
 require_once(__DIR__.'/urls.php');
-
+session_start();
 $parameters = explode('/', $_SERVER['REQUEST_URI']);
 
 foreach($parameters as $k =>$p){

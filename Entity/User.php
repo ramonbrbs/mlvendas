@@ -4,7 +4,7 @@ require_once(__DIR__.'/../Libs/RedBean/setup.php');
 
 class User
 {
-    
+    public $id;
     public $name;
     public $password;
     public $plainPassword;
@@ -14,6 +14,7 @@ class User
     
     
     private function translateFromBD($u){
+        $this->id = $u->id;
         $this->name = $u->name;
         $this->password = $u->password;
         $this->login = $u->login;
@@ -40,10 +41,10 @@ class User
     
     
     public function authenticate(){
-        $u = R::findOne('user', 'login = :login AND password = :password', [':login' => $this->login, ':password' => sha1($this->password)]);
+        $u = R::findOne('user', 'login = :login AND password = :password', [':login' => $this->login, ':password' => sha1($this->plainPassword)]);
         if (!$u == null){
-            translateFromBD($u);
-            return true;
+            $this->translateFromBD($u);
+            return $u->id;
         }
         
         return false;

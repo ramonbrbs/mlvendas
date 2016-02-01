@@ -1,12 +1,9 @@
 <?php
 
 require(__DIR__.'/Entity/User.php');
+require(__DIR__.'/Entity/MLAccount.php');
 
-$user = new User();
-$user->name = "Ramon Barbosa";
-$user->plainPassword = '123456';
-$user->login = 'ramonflmr';
-$user->email = 'ramonflmr@gmail.com';
+$acc = new MLAccount();
+$acc->createTable();
 
 
-var_dump($user->register());

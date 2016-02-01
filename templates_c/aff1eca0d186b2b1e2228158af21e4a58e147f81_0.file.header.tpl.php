@@ -1,17 +1,17 @@
 <?php
-/* Smarty version 3.1.29, created on 2016-01-29 01:58:48
+/* Smarty version 3.1.29, created on 2016-01-31 15:22:59
   from "/home/ubuntu/workspace/Views/header.tpl" */
 
 if ($_smarty_tpl->smarty->ext->_validateCompiled->decodeProperties($_smarty_tpl, array (
   'has_nocache_code' => false,
   'version' => '3.1.29',
-  'unifunc' => 'content_56aac75805cf30_44823120',
+  'unifunc' => 'content_56ae26d34328b6_58411891',
   'file_dependency' => 
   array (
     'aff1eca0d186b2b1e2228158af21e4a58e147f81' => 
     array (
       0 => '/home/ubuntu/workspace/Views/header.tpl',
-      1 => 1454032726,
+      1 => 1454253770,
       2 => 'file',
     ),
   ),
@@ -19,7 +19,7 @@ if ($_smarty_tpl->smarty->ext->_validateCompiled->decodeProperties($_smarty_tpl,
   array (
   ),
 ),false)) {
-function content_56aac75805cf30_44823120 ($_smarty_tpl) {
+function content_56ae26d34328b6_58411891 ($_smarty_tpl) {
 ?>
 <html>
 <head>
@@ -48,6 +48,7 @@ function content_56aac75805cf30_44823120 ($_smarty_tpl) {
       <a class="navbar-brand" href="#">Envios ML</a>
     </div>
 
+    <?php if (isset($_smarty_tpl->tpl_vars['SESSION_USER']->value)) {?>
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
         <li class="active"><a href="#">Fila de Envios <span class="sr-only">(current)</span></a></li>
@@ -71,6 +72,8 @@ function content_56aac75805cf30_44823120 ($_smarty_tpl) {
         <li><a href="#">Sair</a></li>
       </ul>
     </div>
+    <?php }?>
+    
   </div>
 </nav>
 
