@@ -22,6 +22,7 @@ class User
     }
     
     private function translateToBD($u){
+        $u = R::dispense('user');
         $u->name = $this->name;
         $u->password = sha1($this->plainPassword);
         $u->login = $this->login;

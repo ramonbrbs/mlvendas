@@ -5,8 +5,9 @@ session_start();
 $parameters = explode('/', $_SERVER['REQUEST_URI']);
 
 foreach($parameters as $k =>$p){
-    if (strncmp($p,'?',1)==0){
-        unset($parameters[$k]);
+    $pos = strpos($p,'?');
+    if ( $pos != false){
+        $parameters[$k] = substr($parameters[$k],0, $pos);
     }
 
     if (empty($p)){
