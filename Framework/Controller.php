@@ -3,6 +3,7 @@
 require_once(__DIR__ . '/../settings.php');
 require_once(__DIR__ . '/../Libs/Smarty/Smarty.class.php');
 require_once(__DIR__.'/Constant.php');
+require_once(__DIR__.'/../urls.php');
 
 class Controller{
     
@@ -14,10 +15,18 @@ class Controller{
     function __construct(){
         $this->smarty = new Smarty;
         $this->Context = array();
+        $this->assignControllerVars();
         $this->setupSmarty();
         $this->loadStatic();
     }
     
+    
+    private function assignControllerVars(){
+        $URL_RULES = Urls::$URL_RULES;
+        foreach($URL_RULES as $path => $controller){
+            $this->smarty->assign('Controller_'.$controller, ROOT_URL.$path);
+        }
+    }
     
     private function assignPostVars(){
         foreach($_POST as $k => $v){
@@ -66,6 +75,8 @@ class Controller{
     protected function redirectTo($page, $method = null, $args=null){
         if (empty($method)){
             header('Location: '.ROOT_URL.$page);
+        }elseif (empty($args)){
+            header('Location: '.ROOT_URL.$page.'/'.$method);
         }
     }
 }

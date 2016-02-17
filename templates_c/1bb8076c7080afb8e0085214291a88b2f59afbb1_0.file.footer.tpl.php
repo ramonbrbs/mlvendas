@@ -1,11 +1,11 @@
 <?php
-/* Smarty version 3.1.29, created on 2016-01-29 02:26:37
+/* Smarty version 3.1.29, created on 2016-02-07 01:28:22
   from "/home/ubuntu/workspace/Views/footer.tpl" */
 
 if ($_smarty_tpl->smarty->ext->_validateCompiled->decodeProperties($_smarty_tpl, array (
   'has_nocache_code' => false,
   'version' => '3.1.29',
-  'unifunc' => 'content_56aacddd8f8cb2_16718464',
+  'unifunc' => 'content_56b69db6108521_19580195',
   'file_dependency' => 
   array (
     '1bb8076c7080afb8e0085214291a88b2f59afbb1' => 
@@ -19,7 +19,7 @@ if ($_smarty_tpl->smarty->ext->_validateCompiled->decodeProperties($_smarty_tpl,
   array (
   ),
 ),false)) {
-function content_56aacddd8f8cb2_16718464 ($_smarty_tpl) {
+function content_56b69db6108521_19580195 ($_smarty_tpl) {
 ?>
 
         <div class="row" id="section1"></div>

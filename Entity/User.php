@@ -39,6 +39,11 @@ class User
         R::store($u);
     }
     
+    public function load($id){
+        $u = R::load('user', $id);
+        $this->translateFromBD($u);
+        return $u;
+    }
     
     
     public function authenticate(){

@@ -20,7 +20,7 @@ class Index extends Controller{
             if (!Auth::AuthUser($user->login, $user->plainPassword)){
                 $this->Context['auth_failed'] = true;
             }else{
-                $this->redirectTo('dashboard');
+                $this->redirectTo('contas-ml','add');
             }
             
         }

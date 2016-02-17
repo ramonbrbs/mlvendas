@@ -19,10 +19,12 @@ if (empty($parameters)){
     $parameters[0] = '';
 }
 
+$URL_RULES = Urls::$URL_RULES;
 foreach($URL_RULES as $path => $controller){
     
     reset($parameters);
     if ($parameters[key($parameters)] == $path){
+        $controller = new $controller;
         switch(count($parameters)){
             case 1:
                 call_user_func_array(array($controller, 'Index'), array());

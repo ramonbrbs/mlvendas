@@ -1,17 +1,17 @@
 <?php
-/* Smarty version 3.1.29, created on 2016-01-31 15:22:59
+/* Smarty version 3.1.29, created on 2016-02-07 14:13:49
   from "/home/ubuntu/workspace/Views/header.tpl" */
 
 if ($_smarty_tpl->smarty->ext->_validateCompiled->decodeProperties($_smarty_tpl, array (
   'has_nocache_code' => false,
   'version' => '3.1.29',
-  'unifunc' => 'content_56ae26d34328b6_58411891',
+  'unifunc' => 'content_56b7511d3128e2_96131455',
   'file_dependency' => 
   array (
     'aff1eca0d186b2b1e2228158af21e4a58e147f81' => 
     array (
       0 => '/home/ubuntu/workspace/Views/header.tpl',
-      1 => 1454253770,
+      1 => 1454854424,
       2 => 'file',
     ),
   ),
@@ -19,7 +19,7 @@ if ($_smarty_tpl->smarty->ext->_validateCompiled->decodeProperties($_smarty_tpl,
   array (
   ),
 ),false)) {
-function content_56ae26d34328b6_58411891 ($_smarty_tpl) {
+function content_56b7511d3128e2_96131455 ($_smarty_tpl) {
 ?>
 <html>
 <head>
@@ -51,8 +51,9 @@ function content_56ae26d34328b6_58411891 ($_smarty_tpl) {
     <?php if (isset($_smarty_tpl->tpl_vars['SESSION_USER']->value)) {?>
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li class="active"><a href="#">Fila de Envios <span class="sr-only">(current)</span></a></li>
-        <li><a href="#">Contas ML</a></li>
+        <li ><a href="#">Fila de Envios <span class="sr-only">(current)</span></a></li>
+        <li <?php if ((isset($_smarty_tpl->tpl_vars['curr_page']->value) && $_smarty_tpl->tpl_vars['curr_page']->value == 'contas_ml')) {?>class="active"<?php }?>><a href="<?php echo $_smarty_tpl->tpl_vars['Controller_Contas_ML']->value;?>
+/add">Contas ML</a></li>
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Envios <span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
