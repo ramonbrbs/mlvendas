@@ -1,9 +1,9 @@
 <?php
 
-require(__DIR__.'/Entity/User.php');
+require(__DIR__.'/Entity/StatusAnuncio.php');
 require(__DIR__.'/Entity/MLAccount.php');
 
-$acc = new MLAccount();
+$acc = new StatusAnuncio();
 $acc->createTable();
 
 

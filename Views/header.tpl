@@ -22,7 +22,7 @@
     {if isset($SESSION_USER)}
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li ><a href="#">Fila de Envios <span class="sr-only">(current)</span></a></li>
+        <li ><a href="{$Controller_Fila}">Fila de Envios ({$anuncios_pendentes_count})<span class="sr-only">(current)</span></a></li>
         <li {if (isset($curr_page) && $curr_page=='contas_ml')}class="active"{/if}><a href="{$Controller_Contas_ML}/add">Contas ML</a></li>
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Envios <span class="caret"></span></a>
@@ -31,7 +31,7 @@
             <li><a href="#">Histórico</a></li>
             <li><a href="#">Erros</a></li>
             <li class="divider"></li>
-            <li><a href="#">Adicionar Arquivo na Fila</a></li>
+            <li><a href="{$Controller_Fila}/upload">Adicionar Arquivo na Fila</a></li>
             <!--<li class="divider"></li>
             <li><a href="#">One more separated link</a></li>-->
           </ul>

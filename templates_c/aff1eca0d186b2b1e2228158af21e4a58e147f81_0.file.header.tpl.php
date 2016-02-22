@@ -1,17 +1,17 @@
 <?php
-/* Smarty version 3.1.29, created on 2016-02-07 14:13:49
+/* Smarty version 3.1.29, created on 2016-02-22 01:46:49
   from "/home/ubuntu/workspace/Views/header.tpl" */
 
 if ($_smarty_tpl->smarty->ext->_validateCompiled->decodeProperties($_smarty_tpl, array (
   'has_nocache_code' => false,
   'version' => '3.1.29',
-  'unifunc' => 'content_56b7511d3128e2_96131455',
+  'unifunc' => 'content_56ca6889985e04_56336982',
   'file_dependency' => 
   array (
     'aff1eca0d186b2b1e2228158af21e4a58e147f81' => 
     array (
       0 => '/home/ubuntu/workspace/Views/header.tpl',
-      1 => 1454854424,
+      1 => 1456105601,
       2 => 'file',
     ),
   ),
@@ -19,7 +19,7 @@ if ($_smarty_tpl->smarty->ext->_validateCompiled->decodeProperties($_smarty_tpl,
   array (
   ),
 ),false)) {
-function content_56b7511d3128e2_96131455 ($_smarty_tpl) {
+function content_56ca6889985e04_56336982 ($_smarty_tpl) {
 ?>
 <html>
 <head>
@@ -51,7 +51,9 @@ function content_56b7511d3128e2_96131455 ($_smarty_tpl) {
     <?php if (isset($_smarty_tpl->tpl_vars['SESSION_USER']->value)) {?>
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li ><a href="#">Fila de Envios <span class="sr-only">(current)</span></a></li>
+        <li ><a href="<?php echo $_smarty_tpl->tpl_vars['Controller_Fila']->value;?>
+">Fila de Envios (<?php echo $_smarty_tpl->tpl_vars['anuncios_pendentes_count']->value;?>
+)<span class="sr-only">(current)</span></a></li>
         <li <?php if ((isset($_smarty_tpl->tpl_vars['curr_page']->value) && $_smarty_tpl->tpl_vars['curr_page']->value == 'contas_ml')) {?>class="active"<?php }?>><a href="<?php echo $_smarty_tpl->tpl_vars['Controller_Contas_ML']->value;?>
 /add">Contas ML</a></li>
         <li class="dropdown">
@@ -61,7 +63,8 @@ function content_56b7511d3128e2_96131455 ($_smarty_tpl) {
             <li><a href="#">Histórico</a></li>
             <li><a href="#">Erros</a></li>
             <li class="divider"></li>
-            <li><a href="#">Adicionar Arquivo na Fila</a></li>
+            <li><a href="<?php echo $_smarty_tpl->tpl_vars['Controller_Fila']->value;?>
+/upload">Adicionar Arquivo na Fila</a></li>
             <!--<li class="divider"></li>
             <li><a href="#">One more separated link</a></li>-->
           </ul>

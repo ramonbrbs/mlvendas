@@ -4,6 +4,7 @@ require_once(__DIR__ . '/../settings.php');
 require_once(__DIR__ . '/../Libs/Smarty/Smarty.class.php');
 require_once(__DIR__.'/Constant.php');
 require_once(__DIR__.'/../urls.php');
+require_once(__DIR__.'/../Entity/Anuncio.php');
 
 class Controller{
     
@@ -19,6 +20,11 @@ class Controller{
         $this->setupSmarty();
         $this->loadStatic();
     }
+    
+    /*private function anunciosPendentes(){
+        $a = new Anuncio();
+        //$this->smarty->assign('anuncios_pendentes', $a->AnunciosCountByOwner());
+    }*/
     
     
     private function assignControllerVars(){

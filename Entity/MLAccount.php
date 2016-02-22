@@ -104,6 +104,12 @@ class MLAccount{
         
     }
     
+    public function Load($id){
+        $u = R::load('mlaccount', $id);
+        $this->translateFromBD($u);
+        return $u;
+    }
+    
     private function getMeli(){
         return new Meli(ML_APP_ID, ML_APP_SECRET_KEY, $this->access_token, $this->refresh_token);
     }
