@@ -7,7 +7,7 @@ class StatusAnuncio{
     const STATUS_PENDENTE = 'STATUS_PENDENTE';
     const STATUS_ANUNCIADO = 'STATUS_ANUNCIADO';
     const STATUS_ERRO = 'STATUS_ERRO';
-    
+    const STATUS_EXECUCAO = 'STATUS_EXECUCAO';
     
     
     public $id;

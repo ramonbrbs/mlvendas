@@ -20,12 +20,34 @@ class Fila extends Controller{
         $this->Context['anuncios_pendentes_count'] = count($a->AnunciosPendentesByOwner($_SESSION[SESSION_USER]->id));
     }
     
+    public function Pendentes(){
+        $this->ViewFile = 'fila__pendentes';
+        $a = new Anuncio();
+        $this->Context['anuncios'] = $a->AnunciosPendentesByOwner($_SESSION[SESSION_USER]->id);
+        $this->Render();
+    }
+    
+    public function Erro(){
+        $this->ViewFile = 'fila__erro';
+        $a = new Anuncio();
+        $this->Context['anuncios'] = $a->AnunciosErroByOwner($_SESSION[SESSION_USER]->id);
+        $this->Render();
+    }
+    
+    public function Ok(){
+        $this->ViewFile = 'fila__ok';
+        $a = new Anuncio();
+        $this->Context['anuncios'] = $a->AnunciosAnunciadoByOwner($_SESSION[SESSION_USER]->id);
+        $this->Render();
+    }
+    
     public function Index(){
         $this->ViewFile = 'fila__index';
         $a = new Anuncio();
-        $this->Context['anuncios_pendentes'] = $a->AnunciosPendentesByOwner($_SESSION[SESSION_USER]->id);
-        $this->Context['anuncios_erro'] = $a->AnunciosErroByOwner($_SESSION[SESSION_USER]->id);
-        $this->Context['anuncios_ok'] = $a->AnunciosAnunciadoByOwner($_SESSION[SESSION_USER]->id);
+        $this->Context['anuncios_pendentes'] = count($a->AnunciosPendentesByOwner($_SESSION[SESSION_USER]->id));
+        $this->Context['anuncios_erro'] = count($a->AnunciosErroByOwner($_SESSION[SESSION_USER]->id));
+        $this->Context['anuncios_ok'] = count($a->AnunciosAnunciadoByOwner($_SESSION[SESSION_USER]->id));
+        $this->Render();
     }
     
     function Upload(){

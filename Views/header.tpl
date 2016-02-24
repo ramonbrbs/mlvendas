@@ -5,6 +5,8 @@
     <link rel="stylesheet" href="{$static}/css/bootstrap.css" media="screen">
     <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
     <script src="{$static}/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.11/css/jquery.dataTables.min.css" media="screen">
+    <script src='https://cdn.datatables.net/1.10.11/js/jquery.dataTables.min.js'></script>
 
 
 <nav class="navbar navbar-default">
