@@ -13,6 +13,10 @@ class User
     
     
     
+    public static function All(){
+        return R::findAll('user');
+    }
+    
     private function translateFromBD($u){
         $this->id = $u->id;
         $this->name = $u->name;
@@ -22,7 +26,12 @@ class User
     }
     
     private function translateToBD($u){
-        $u = R::dispense('user');
+        if(isset($this->id)){
+            $u = R::load('user',$this->id);
+        }else{
+            $u = R::dispense('user');
+        }
+        
         $u->name = $this->name;
         $u->password = sha1($this->plainPassword);
         $u->login = $this->login;
@@ -57,6 +66,12 @@ class User
             
     }
     
+    public function Save(){
+        $u = '';
+        $acc = $this->translateToBD($u);
+        $this->id = R::store($acc);
+        return $this->id;
+    }
     
     
     public function register(){
@@ -86,14 +101,10 @@ class User
         }
         
         if (empty($errors)){
-            $user = R::dispense('user');
-            $user->name = $this->name;
-            $user->password = sha1($this->plainPassword);
-            $user->login = $this->login;
-            $user->email = $this->email;
-            
-            return R::store($user);
+            $this->Save();
+            return $this->id;   
         }
+        
         
         return $errors;
         

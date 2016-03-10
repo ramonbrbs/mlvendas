@@ -3,6 +3,7 @@ require_once(__DIR__.'/User.php');
 require_once(__DIR__.'/MLAccount.php');
 require_once(__DIR__.'/StatusAnuncio.php');
 
+
 class Anuncio{
     public $id;
     public $sku;
@@ -22,6 +23,8 @@ class Anuncio{
     public $tipo;
     public $frete_gratis;
     public $norte_nordeste;
+    public $erro;
+    public $categoriaid;
     
     public $mlaccount;
     public $owner;

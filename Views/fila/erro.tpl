@@ -7,6 +7,7 @@
             <th>Título</th>
             <th>SKU</th>
             <th>Conta ML</th>
+            <th>Erro</th>
         </tr>
     </thead>
     <tbody>
@@ -15,6 +16,7 @@
                 <td>{$anuncio->titulo}</td>
                 <td>{$anuncio->SKU}</td>
                 <td>{$anuncio->mlaccount->nickname}</td>
+                <th>{$anuncio->error}</th>
             </tr>
         {/foreach}
     </tbody>

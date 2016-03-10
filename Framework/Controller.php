@@ -84,5 +84,7 @@ class Controller{
         }elseif (empty($args)){
             header('Location: '.ROOT_URL.$page.'/'.$method);
         }
+        exit();
     }
+    
 }

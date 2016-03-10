@@ -63,28 +63,31 @@ class Fila extends Controller{
                 unset($sheetData[$i]);
             }
             foreach($sheetData as $item){
-                $anuncio = new Anuncio();
-                $anuncio->sku = $item['A'];
-                $anuncio->titulo = $item['B'];
-                $anuncio->num_letras = $item['C'];
-                $anuncio->categoria = $item['D'];
-                $anuncio->descricao = $item['E'];
-                $anuncio->preco = $item['F'];
-                $anuncio->estoque = $item['G'];
-                $anuncio->foto1 = $item['H'];
-                $anuncio->foto2 = $item['I'];
-                $anuncio->foto3 = $item['J'];
-                $anuncio->foto4 = $item['K'];
-                $anuncio->foto5 = $item['L'];
-                $anuncio->foto6 = $item['M'];
-                $anuncio->youtube = $item['N'];
-                $anuncio->tipo = $item['O'];
-                $anuncio->frete_gratis = $item['P'];
-                $anuncio->norte_nordeste = $item['Q'];
-                $anuncio->status = StatusAnuncio::STATUS_PENDENTE;
-                $anuncio->owner = $_SESSION[SESSION_USER]->id;
-                $anuncio->mlaccount = $_POST['mlaccount'];
-                $anuncio->Save();
+                if (isset($item['B']) and !empty($item['B'])){
+                    $anuncio = new Anuncio();
+                    $anuncio->sku = $item['A'];
+                    $anuncio->titulo = $item['B'];
+                    $anuncio->num_letras = $item['C'];
+                    $anuncio->categoria = $item['D'];
+                    $anuncio->descricao = $item['E'];
+                    $anuncio->preco = $item['F'];
+                    $anuncio->estoque = $item['G'];
+                    $anuncio->foto1 = $item['H'];
+                    $anuncio->foto2 = $item['I'];
+                    $anuncio->foto3 = $item['J'];
+                    $anuncio->foto4 = $item['K'];
+                    $anuncio->foto5 = $item['L'];
+                    $anuncio->foto6 = $item['M'];
+                    $anuncio->youtube = $item['N'];
+                    $anuncio->tipo = $item['O'];
+                    $anuncio->frete_gratis = $item['P'];
+                    $anuncio->norte_nordeste = $item['Q'];
+                    $anuncio->status = StatusAnuncio::STATUS_PENDENTE;
+                    $anuncio->owner = $_SESSION[SESSION_USER]->id;
+                    $anuncio->mlaccount = $_POST['mlaccount'];
+                    $anuncio->Save();
+                }
+                
             }
             //var_dump($sheetData);
             

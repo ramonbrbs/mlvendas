@@ -1,17 +1,17 @@
 <?php
-/* Smarty version 3.1.29, created on 2016-02-22 14:43:43
+/* Smarty version 3.1.29, created on 2016-03-08 09:07:40
   from "/home/ubuntu/workspace/Views/header.tpl" */
 
 if ($_smarty_tpl->smarty->ext->_validateCompiled->decodeProperties($_smarty_tpl, array (
   'has_nocache_code' => false,
   'version' => '3.1.29',
-  'unifunc' => 'content_56cb1e9fda7060_22267905',
+  'unifunc' => 'content_56de965c93b143_61120648',
   'file_dependency' => 
   array (
     'aff1eca0d186b2b1e2228158af21e4a58e147f81' => 
     array (
       0 => '/home/ubuntu/workspace/Views/header.tpl',
-      1 => 1456149584,
+      1 => 1457428055,
       2 => 'file',
     ),
   ),
@@ -19,7 +19,7 @@ if ($_smarty_tpl->smarty->ext->_validateCompiled->decodeProperties($_smarty_tpl,
   array (
   ),
 ),false)) {
-function content_56cb1e9fda7060_22267905 ($_smarty_tpl) {
+function content_56de965c93b143_61120648 ($_smarty_tpl) {
 ?>
 <html>
 <head>
@@ -56,10 +56,12 @@ function content_56cb1e9fda7060_22267905 ($_smarty_tpl) {
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
         <li ><a href="<?php echo $_smarty_tpl->tpl_vars['Controller_Fila']->value;?>
-">Fila de Envios (<?php echo $_smarty_tpl->tpl_vars['anuncios_pendentes_count']->value;?>
-)<span class="sr-only">(current)</span></a></li>
+">Fila de Envios <?php if (isset($_smarty_tpl->tpl_vars['anuncios_pendentes_count']->value)) {?>(<?php echo $_smarty_tpl->tpl_vars['anuncios_pendentes_count']->value;?>
+)<?php }?> <span class="sr-only">(current)</span></a></li>
         <li <?php if ((isset($_smarty_tpl->tpl_vars['curr_page']->value) && $_smarty_tpl->tpl_vars['curr_page']->value == 'contas_ml')) {?>class="active"<?php }?>><a href="<?php echo $_smarty_tpl->tpl_vars['Controller_Contas_ML']->value;?>
 /add">Contas ML</a></li>
+        <li <?php if ((isset($_smarty_tpl->tpl_vars['curr_page']->value) && $_smarty_tpl->tpl_vars['curr_page']->value == 'usuarios')) {?>class="active"<?php }?>><a href="<?php echo $_smarty_tpl->tpl_vars['Controller_Usuarios']->value;?>
+/listar">Usuarios</a></li>
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Envios <span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">

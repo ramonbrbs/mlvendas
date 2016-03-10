@@ -114,7 +114,7 @@ class MLAccount{
         return new Meli(ML_APP_ID, ML_APP_SECRET_KEY, $this->access_token, $this->refresh_token);
     }
     
-    private function checkRefreshToken(){
+    public function checkRefreshToken(){
         $meli = $this->getMeli();
         if ($this->expires < time()){
             $refresh = $meli->refreshAccessToken();
@@ -125,6 +125,14 @@ class MLAccount{
             }
             $this->Save();
         }
+        
+    }
+    
+    public function PostAnuncio(){
+        $this->checkRefreshToken();
+        $params = array('access_token' => $this->access_token);
+        $meli = $this->getMeli();
+        $result = $meli->get("/users/me", $params);
         
     }
 }
