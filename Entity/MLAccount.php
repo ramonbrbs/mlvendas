@@ -22,7 +22,7 @@ class MLAccount{
         $this->access_token = $u->access_token;
         $this->expires = $u->expires;
         $this->refresh_token = $u->refresh_token;
-        $this->owner = $u->owner;
+        $this->owner = $u->owner_id;
     }
     
     private function translateToBD(){

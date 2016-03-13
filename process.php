@@ -74,11 +74,16 @@ $mlaccounts = R::findAll('mlaccount');
 
 foreach($mlaccounts as $acc){
     $anuncios_pendentes = R::find('anuncio', 'status_id = :id AND mlaccount_id = :mlaccount', array(':id' => $status_pendente->id, ':mlaccount' => $acc->id));
-    $date1 = date('Y-m-d H:m:s',strtotime('-24 hours'));
-    $date2 = date('Y-m-d H:m:s');
-    $anuncios_ultimas_24 = R::find('anuncio', 'mlaccount_id = :mlaccount AND datepost BETWEEN :date1 AND :date2', array(':mlaccount' => $acc->id, ':date1' => $date1, ':date2'=> $date2));
+    
+    
     
     foreach($anuncios_pendentes as $a){
+        $date1 = date('Y-m-d H:m:s',strtotime('-24 hours'));
+        $date2 = date('Y-m-d H:m:s');
+        $anuncios_ultimas_24 = R::find('anuncio', 'mlaccount_id = :mlaccount AND datepost BETWEEN :date1 AND :date2', array(':mlaccount' => $acc->id, ':date1' => $date1, ':date2'=> $date2));
+        if (count($anuncios_ultimas_24) >= 1000){
+            break 2;
+        }
         if (!isset($a->categoriaid)){
             $id = resolverCategoria($a->categoria);
             $a->categoriaid = $id;
@@ -112,12 +117,12 @@ foreach($mlaccounts as $acc){
             $accML->Load($acc->id);
             $accML->checkRefreshToken();
             $result = $meli->post('/items/validate', $anuncio, array('access_token' => $accML->access_token));
-            print($result);
-            //exit();
             if ($result['httpCode'] == 204){
-                exit();
+                
                 $result = $meli->post('/items', $anuncio, array('access_token' => $accML->access_token));
                 $a->status = $status_anunciado;
+                $a->permalink = $result['body']->permalink;
+                R::store($a);
             }else{
                 foreach($result['body']->cause as $e){
                     $a->error .= $e->message;
