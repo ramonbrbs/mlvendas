@@ -96,10 +96,17 @@ foreach($mlaccounts as $acc){
             $anuncio['video_id'] = $a->youtube;
             $anuncio['condition'] = 'new';
             //$anuncio['buying_mode'] = 'buy_it_now';
-            if ($a->tipo == 'Premium'){
+            if (strtoupper($a->tipo) == 'PREMIUM'){
                 $anuncio['listing_type_id'] = 'gold_pro';
             }else{
                 $anuncio['listing_type_id'] = 'gold_special';
+            }
+            
+            if(strtoupper($a->frete_gratis) == 'SIM'){
+                $anuncio['shipping']= array();
+                $anuncio['shipping']['id'] = 100009;
+                $anuncio['shipping']['free_shipping'] = true;
+                $anuncio['shipping']['rule'] = array('free_mode'=>'country', 'value'=>null);
             }
             $accML = new MLAccount();
             $accML->Load($acc->id);
@@ -108,6 +115,7 @@ foreach($mlaccounts as $acc){
             print($result);
             //exit();
             if ($result['httpCode'] == 204){
+                exit();
                 $result = $meli->post('/items', $anuncio, array('access_token' => $accML->access_token));
                 $a->status = $status_anunciado;
             }else{
