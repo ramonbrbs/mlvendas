@@ -12,7 +12,7 @@
     <tbody>
         {foreach $anuncios as $anuncio }
             <tr>
-                <td>{$anuncio->titulo}</td>
+                <td><a href="{$anuncio->permalink}"> {$anuncio->titulo} </a></td>
                 <td>{$anuncio->SKU}</td>
                 <td>{$anuncio->mlaccount->nickname}</td>
             </tr>
