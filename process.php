@@ -82,8 +82,8 @@ while(true)
         $anuncios_pendentes = R::find('anuncio', 'status_id = :id AND mlaccount_id = :mlaccount', array(':id' => $status_pendente->id, ':mlaccount' => $acc->id));
         $date1 = date('Y-m-d H:m:s',strtotime('-24 hours'));
         $date2 = date('Y-m-d H:m:s');
-        $anuncios_ultimas_24 = R::find('anuncio', 'mlaccount_id = :mlaccount AND datepost BETWEEN :date1 AND :date2', array(':mlaccount' => $acc->id, ':date1' => $date1, ':date2'=> $date2));
-        if (count($anuncios_ultimas_24) >= 8000){
+        $anuncios_ultimas_24 = R::count('anuncio', 'mlaccount_id = :mlaccount AND datepost BETWEEN :date1 AND :date2', array(':mlaccount' => $acc->id, ':date1' => $date1, ':date2'=> $date2));
+        if ($anuncios_ultimas_24 >= 8000){
             break ;
         }
         
@@ -143,8 +143,9 @@ while(true)
         }
     }
     }catch (Exception $e) {
+        var_dump($e);
     }
     
-sleep(5);
+sleep(15);
 
 }    

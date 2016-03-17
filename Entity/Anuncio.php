@@ -59,6 +59,11 @@ class Anuncio{
         $accs = R::find('anuncio', 'owner_id = :owner_id AND status_id = :erro', ['owner_id' => $id, ':erro' => 3]);
         return $accs;
     }
+    public static function AnunciosCountErroByOwner($id){
+        $result = array();
+        $accs = R::find('anuncio', 'owner_id = :owner_id AND status_id = :erro', ['owner_id' => $id, ':erro' => 3]);
+        return $accs;
+    }
     
     public static function AnunciosAnunciadoByOwner($id){
         $result = array();
