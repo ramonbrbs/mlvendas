@@ -17,13 +17,13 @@ class Fila extends Controller{
         $this->ViewFile = 'fila__upload';
         $this->Context['accounts'] = MLAccount::AccountsByOwner($_SESSION[SESSION_USER]->id);
         $a = new Anuncio();
-        $this->Context['anuncios_pendentes_count'] = count($a->AnunciosCountAnunciadoByOwner($_SESSION[SESSION_USER]->id));
+        $this->Context['anuncios_pendentes_count'] = $a->AnunciosCountPendentesByOwner($_SESSION[SESSION_USER]->id);
     }
     
     public function Pendentes(){
         $this->ViewFile = 'fila__pendentes';
         $a = new Anuncio();
-        $this->Context['anuncios'] = $a->AnunciosPendentesByOwner($_SESSION[SESSION_USER]->id);
+        $this->Context['anuncios'] = $a->AnunciosCountPendentesByOwner($_SESSION[SESSION_USER]->id);
         $this->Render();
     }
     
