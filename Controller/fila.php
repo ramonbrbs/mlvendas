@@ -37,7 +37,7 @@ class Fila extends Controller{
     public function Ok(){
         $this->ViewFile = 'fila__ok';
         $a = new Anuncio();
-        $this->Context['anuncios'] = $a->AnunciosAnunciadoByOwner($_SESSION[SESSION_USER]->id);
+        $this->Context['anuncios'] = $a->AnunciosCountAnunciadoByOwner($_SESSION[SESSION_USER]->id);
         $this->Render();
     }
     
