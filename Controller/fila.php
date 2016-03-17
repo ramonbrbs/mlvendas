@@ -23,7 +23,7 @@ class Fila extends Controller{
     public function Pendentes(){
         $this->ViewFile = 'fila__pendentes';
         $a = new Anuncio();
-        $this->Context['anuncios'] = $a->AnunciosCountPendentesByOwner($_SESSION[SESSION_USER]->id);
+        $this->Context['anuncios'] = $a->AnunciosPendentesByOwner($_SESSION[SESSION_USER]->id);
         $this->Render();
     }
     
