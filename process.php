@@ -80,16 +80,16 @@ while(true)
     
     foreach($mlaccounts as $acc){
         $anuncios_pendentes = R::find('anuncio', 'status_id = :id AND mlaccount_id = :mlaccount', array(':id' => $status_pendente->id, ':mlaccount' => $acc->id));
-        
+        $date1 = date('Y-m-d H:m:s',strtotime('-24 hours'));
+        $date2 = date('Y-m-d H:m:s');
+        $anuncios_ultimas_24 = R::find('anuncio', 'mlaccount_id = :mlaccount AND datepost BETWEEN :date1 AND :date2', array(':mlaccount' => $acc->id, ':date1' => $date1, ':date2'=> $date2));
+        if (count($anuncios_ultimas_24) >= 8000){
+            break ;
+        }
         
         
         foreach($anuncios_pendentes as $a){
-            $date1 = date('Y-m-d H:m:s',strtotime('-24 hours'));
-            $date2 = date('Y-m-d H:m:s');
-            $anuncios_ultimas_24 = R::find('anuncio', 'mlaccount_id = :mlaccount AND datepost BETWEEN :date1 AND :date2', array(':mlaccount' => $acc->id, ':date1' => $date1, ':date2'=> $date2));
-            if (count($anuncios_ultimas_24) >= 8000){
-                break 2;
-            }
+            
             if (!isset($a->categoriaid)){
                 $id = resolverCategoria($a->categoria);
                 $a->categoriaid = $id;
