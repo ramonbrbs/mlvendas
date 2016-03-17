@@ -17,7 +17,7 @@ class Fila extends Controller{
         $this->ViewFile = 'fila__upload';
         $this->Context['accounts'] = MLAccount::AccountsByOwner($_SESSION[SESSION_USER]->id);
         $a = new Anuncio();
-        $this->Context['anuncios_pendentes_count'] = count($a->AnunciosPendentesByOwner($_SESSION[SESSION_USER]->id));
+        $this->Context['anuncios_pendentes_count'] = count($a->AnunciosCountPendentesByOwner($_SESSION[SESSION_USER]->id));
     }
     
     public function Pendentes(){
@@ -44,9 +44,9 @@ class Fila extends Controller{
     public function Index(){
         $this->ViewFile = 'fila__index';
         $a = new Anuncio();
-        $this->Context['anuncios_pendentes'] = count($a->AnunciosPendentesByOwner($_SESSION[SESSION_USER]->id));
+        $this->Context['anuncios_pendentes'] = count($a->AnunciosCountPendentesByOwner($_SESSION[SESSION_USER]->id));
         $this->Context['anuncios_erro'] = count($a->AnunciosErroByOwner($_SESSION[SESSION_USER]->id));
-        $this->Context['anuncios_ok'] = count($a->AnunciosAnunciadoByOwner($_SESSION[SESSION_USER]->id));
+        $this->Context['anuncios_ok'] = count($a->AnunciosCountAnunciadoByOwner($_SESSION[SESSION_USER]->id));
         $this->Render();
     }
     

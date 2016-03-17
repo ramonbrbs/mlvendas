@@ -48,6 +48,12 @@ class Anuncio{
         return $accs;
     }
     
+    public static function AnunciosCountPendentesByOwner($id){
+        $result = array();
+        $accs = R::count('anuncio', 'owner_id = :owner_id AND status_id = :pendente', ['owner_id' => $id, ':pendente' => 1]);
+        return $accs;
+    }
+    
     public static function AnunciosErroByOwner($id){
         $result = array();
         $accs = R::find('anuncio', 'owner_id = :owner_id AND status_id = :erro', ['owner_id' => $id, ':erro' => 3]);
@@ -57,6 +63,12 @@ class Anuncio{
     public static function AnunciosAnunciadoByOwner($id){
         $result = array();
         $accs = R::find('anuncio', 'owner_id = :owner_id AND status_id = :anunciado', ['owner_id' => $id, ':anunciado' => 2]);
+        return $accs;
+    }
+    
+    public static function AnunciosCountAnunciadoByOwner($id){
+        $result = array();
+        $accs = R::count('anuncio', 'owner_id = :owner_id AND status_id = :anunciado', ['owner_id' => $id, ':anunciado' => 2]);
         return $accs;
     }
     

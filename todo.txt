@@ -1,0 +1,3 @@
+arredondar 2 casas decimais nos anuncios
+mostrar enviados / erro dos últimos 7 dias apenas
+mostrar últimos arquivos subidos
