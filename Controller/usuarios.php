@@ -44,7 +44,7 @@ class Usuarios extends Controller{
                 $u->id = $result;
                 $u->Load($result );
                 
-                $this->redirectTo('usuarios', 'adicionar', array($u->id));
+                $this->redirectTo('usuarios', 'index', array($u->id));
             }else{
                 $this->Context['errors'] = $result;
             }

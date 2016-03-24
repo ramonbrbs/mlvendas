@@ -25,6 +25,7 @@ class Anuncio{
     public $norte_nordeste;
     public $erro;
     public $categoriaid;
+    public $file;
     
     public $mlaccount;
     public $owner;
@@ -42,10 +43,24 @@ class Anuncio{
         return $accs;
     }
     
-    public static function AnunciosPendentesByOwner($id){
-        $result = array();
+    public static function AnunciosPendentesByOwner($id,$start = null,$len = null,$search = null){
+        if (isset($search)){
+            $acc = R::find('anuncio', "owner_id = :owner_id AND status_id = :pendente AND titulo LIKE :titulo LIMIT $start,$len ",[':titulo'=> '%'.$search.'%', 'owner_id' => $id, ':pendente' => 1]);
+            return $acc;
+        }
+        if(isset($start)){
+            $acc = R::find('anuncio', "owner_id = :owner_id AND status_id = :pendente LIMIT $start,$len ",['owner_id' => $id, ':pendente' => 1]);
+            return $acc;
+        }
+        
+        
         $accs = R::find('anuncio', 'owner_id = :owner_id AND status_id = :pendente', ['owner_id' => $id, ':pendente' => 1]);
         return $accs;
+        
+        /*
+        $result = array();
+        $accs = R::find('anuncio', 'owner_id = :owner_id AND status_id = :pendente', ['owner_id' => $id, ':pendente' => 1]);
+        return $accs;*/
     }
     
     public static function AnunciosCountPendentesByOwner($id){
@@ -61,12 +76,22 @@ class Anuncio{
     }
     public static function AnunciosCountErroByOwner($id){
         $result = array();
-        $accs = R::find('anuncio', 'owner_id = :owner_id AND status_id = :erro', ['owner_id' => $id, ':erro' => 3]);
+        $accs = R::count('anuncio', 'owner_id = :owner_id AND status_id = :erro', ['owner_id' => $id, ':erro' => 3]);
         return $accs;
     }
     
-    public static function AnunciosAnunciadoByOwner($id){
+    public static function AnunciosAnunciadoByOwner($id,$start = null,$len = null,$search = null){
         $result = array();
+        if (isset($search)){
+            $acc = R::find('anuncio', "owner_id = :owner_id AND status_id = :anunciado AND titulo LIKE :titulo LIMIT $start,$len ",[':titulo'=> '%'.$search.'%', 'owner_id' => $id, ':anunciado' => 2]);
+            return $acc;
+        }
+        if(isset($start)){
+            $acc = R::find('anuncio', "owner_id = :owner_id AND status_id = :anunciado LIMIT $start,$len ",['owner_id' => $id, ':anunciado' => 2]);
+            return $acc;
+        }
+        
+        
         $accs = R::find('anuncio', 'owner_id = :owner_id AND status_id = :anunciado', ['owner_id' => $id, ':anunciado' => 2]);
         return $accs;
     }
@@ -100,6 +125,7 @@ class Anuncio{
         $this->tipo = $u->tipo;
         $this->frete_gratis = $u->frete_gratis;
         $this->norte_nordeste = $u->norte_nordeste;
+        $this->file = $u->file;
         $this->mlaccount = $u->mlaccount;
         $this->owner = $u->owner;
         $this->status = $u->status;
@@ -128,7 +154,7 @@ class Anuncio{
         $u->tipo = $this->tipo;
         $u->frete_gratis = $this->frete_gratis;
         $u->norte_nordeste = $this->norte_nordeste;
-        
+        $u->file = $this->file;
         
         $owner = new User();
         $owner->load($this->owner);

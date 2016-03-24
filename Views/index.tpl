@@ -1,6 +1,10 @@
 {include file="header.tpl"}
 
-
+<div>
+  {foreach $errors as $e }
+  <p>$e</p>
+  {/foreach}
+</div>
 <div class="container col-md-4 col-md-offset-4 col-xs-12">
 
       <form class="form-signin" method='POST' action=''>

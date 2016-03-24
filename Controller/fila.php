@@ -27,6 +27,45 @@ class Fila extends Controller{
         $this->Render();
     }
     
+    public function PendentesAjax(){
+        $search = $_GET['search']['value'];
+        $start = $_GET['start'];
+        $len = $_GET['length'];
+        $a = new Anuncio();
+        
+        $data = array();
+        $anuncios =  $a->AnunciosPendentesByOwner($_SESSION[SESSION_USER]->id,$start,$len,$search);
+        foreach($anuncios as $a){
+            $data[] = [$a->titulo, $a->sku,$a->mlaccount->nickname];
+        }
+        $response = array();
+        $response['data'] = $data;
+        $response['recordsTotal'] = $a->AnunciosCountPendentesByOwner($_SESSION[SESSION_USER]->id);
+        $response['recordsFiltered'] = count($anuncios);
+        $response['draw'] = (integer)$_GET['draw'];
+       echo(json_encode($response));
+        //echo('{ "draw": 1, "recordsTotal": 57, "recordsFiltered": 57, "data": [ [ "Angelica", "Ramos", "System Architect" ] ] }');
+    }
+    
+    public function OkAjax(){
+        $search = $_GET['search']['value'];
+        $start = $_GET['start'];
+        $len = $_GET['length'];
+        $a = new Anuncio();
+        
+        $data = array();
+        $anuncios =  $a->AnunciosAnunciadoByOwner($_SESSION[SESSION_USER]->id,$start,$len,$search);
+        foreach($anuncios as $a){
+            $data[] = [$a->titulo, $a->sku,$a->mlaccount->nickname];
+        }
+        $response = array();
+        $response['data'] = $data;
+        $response['recordsTotal'] = 500;
+        $response['recordsFiltered'] = 500;
+        $response['draw'] = (integer)$_GET['draw'];
+       echo(json_encode($response));
+    }
+    
     public function Erro(){
         $this->ViewFile = 'fila__erro';
         $a = new Anuncio();
@@ -37,16 +76,16 @@ class Fila extends Controller{
     public function Ok(){
         $this->ViewFile = 'fila__ok';
         $a = new Anuncio();
-        $this->Context['anuncios'] = $a->AnunciosCountAnunciadoByOwner($_SESSION[SESSION_USER]->id);
+        $this->Context['anuncios'] = $a->AnunciosAnunciadoByOwner($_SESSION[SESSION_USER]->id);
         $this->Render();
     }
     
     public function Index(){
         $this->ViewFile = 'fila__index';
         $a = new Anuncio();
-        $this->Context['anuncios_pendentes'] = count($a->AnunciosPendentesByOwner($_SESSION[SESSION_USER]->id));
-        $this->Context['anuncios_erro'] = count($a->AnunciosErroByOwner($_SESSION[SESSION_USER]->id));
-        $this->Context['anuncios_ok'] = count($a->AnunciosAnunciadoByOwner($_SESSION[SESSION_USER]->id));
+        $this->Context['anuncios_pendentes'] = $a->AnunciosCountPendentesByOwner($_SESSION[SESSION_USER]->id);
+        $this->Context['anuncios_erro'] = $a->AnunciosCountErroByOwner($_SESSION[SESSION_USER]->id);
+        $this->Context['anuncios_ok'] = $a->AnunciosCountAnunciadoByOwner($_SESSION[SESSION_USER]->id);
         $this->Render();
     }
     
@@ -85,6 +124,7 @@ class Fila extends Controller{
                     $anuncio->status = StatusAnuncio::STATUS_PENDENTE;
                     $anuncio->owner = $_SESSION[SESSION_USER]->id;
                     $anuncio->mlaccount = $_POST['mlaccount'];
+                    $anuncio->file = $_FILES['file']['name'];
                     $anuncio->Save();
                 }
                 

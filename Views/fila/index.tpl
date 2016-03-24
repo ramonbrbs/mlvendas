@@ -1,5 +1,33 @@
 {include file="header.tpl"}
 
+<script>
+  $(document).ready(function() {
+    $('#example').DataTable( {
+        "serverSide": true,
+        ajax: {
+            url: 'https://vendasml-ramonbrbs.c9users.io/fila/PendentesAjax'
+            //dataFilter: function(data){
+                //console.log(data);
+            //}
+        }
+        
+    } );
+} );
+</script>
+
+
+<table id="example">
+    <thead>
+        <tr>
+            <th>Título</th>
+            <th>SKU</th>
+            <th>Conta ML</th>
+        </tr>
+    </thead>
+    
+</table>
+
+
 <div class='container'>
   <a href='{$Controller_Fila}/Ok'>
     <button type="button" class="btn btn-default btn-lg">

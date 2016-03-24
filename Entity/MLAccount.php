@@ -105,7 +105,7 @@ class MLAccount{
     }
     
     public function Load($id){
-        $u = R::load('mlaccount', $id);
+        $u = R::load('mlaccount', (integer)$id);
         $this->translateFromBD($u);
         return $u;
     }
