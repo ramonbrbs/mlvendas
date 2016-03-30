@@ -83,8 +83,8 @@ $contasPendentes = R::getAll( 'SELECT DISTINCT mlaccount_id FROM anuncio WHERE s
 
 foreach($contasPendentes as $k =>$c){
     
-    $date1 = date('Y-m-d H:m:s',strtotime('-24 hours'));
-    $date2 = date('Y-m-d H:m:s');
+    $date1 = date('"Y-m-d H:i:s"',strtotime('-24 hours'));
+    $date2 = date("Y-m-d H:i:s");
     $anuncios_ultimas_24 = R::count('anuncio', 'mlaccount_id = :mlaccount AND datepost BETWEEN :date1 AND :date2', array(':mlaccount' => $c['mlaccount_id'], ':date1' => $date1, ':date2'=> $date2));
     if($anuncios_ultimas_24 > MAX_ANUN_DAY){
         unset($contasPendentes[$k]);
@@ -139,6 +139,7 @@ foreach($anuncios as $a){
             $a->status = $status_anunciado;
             $a->permalink = $result['body']->permalink;
             $a->json = json_encode($anuncio);
+            $a->datepost = date("Y-m-d H:i:s");
             R::store($a);
         }else{
             foreach($result['body']->cause as $e){

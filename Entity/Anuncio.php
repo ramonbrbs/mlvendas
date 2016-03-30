@@ -63,21 +63,48 @@ class Anuncio{
         return $accs;*/
     }
     
-    public static function AnunciosCountPendentesByOwner($id){
+    public static function AnunciosCountPendentesByOwner($id, $search = null){
         $result = array();
-        $accs = R::count('anuncio', 'owner_id = :owner_id AND status_id = :pendente', ['owner_id' => $id, ':pendente' => 1]);
-        return $accs;
+        if (isset($search)){
+            return R::count('anuncio', 'owner_id = :owner_id AND status_id = :pendente AND titulo LIKE :titulo', [':titulo'=> '%'.$search.'%','owner_id' => $id, ':pendente' => 1]);
+        }else{
+            return R::count('anuncio', 'owner_id = :owner_id AND status_id = :pendente', ['owner_id' => $id, ':pendente' => 1]);
+        }
+        
+        
+        //$accs = R::count('anuncio', 'owner_id = :owner_id AND status_id = :pendente', ['owner_id' => $id, ':pendente' => 1]);
+        //return $accs;
     }
     
-    public static function AnunciosErroByOwner($id){
-        $result = array();
+    public static function AnunciosErroByOwner($id,$start = null,$len = null,$search = null){
+        if (isset($search)){
+            $acc = R::find('anuncio', "owner_id = :owner_id AND status_id = :erro AND titulo LIKE :titulo LIMIT $start,$len ",[':titulo'=> '%'.$search.'%', 'owner_id' => $id, ':erro' => 3]);
+            return $acc;
+        }
+        if(isset($start)){
+            $acc = R::find('anuncio', "owner_id = :owner_id AND status_id = :erro LIMIT $start,$len ",['owner_id' => $id, ':erro' => 3]);
+            return $acc;
+        }
+        
+        
         $accs = R::find('anuncio', 'owner_id = :owner_id AND status_id = :erro', ['owner_id' => $id, ':erro' => 3]);
         return $accs;
+        //$result = array();
+        //$accs = R::find('anuncio', 'owner_id = :owner_id AND status_id = :erro', ['owner_id' => $id, ':erro' => 3]);
+        //return $accs;
     }
-    public static function AnunciosCountErroByOwner($id){
-        $result = array();
-        $accs = R::count('anuncio', 'owner_id = :owner_id AND status_id = :erro', ['owner_id' => $id, ':erro' => 3]);
-        return $accs;
+    
+    public static function AnunciosCountErroByOwner($id, $search=null){
+        if (isset($search)){
+            return R::count('anuncio', 'owner_id = :owner_id AND status_id = :erro AND titulo LIKE :titulo', [':titulo'=> '%'.$search.'%','owner_id' => $id, ':erro' => 3]);
+        }else{
+            return R::count('anuncio', 'owner_id = :owner_id AND status_id = :erro', ['owner_id' => $id, ':erro' => 3]);
+        }
+        
+        
+        
+        //$accs = R::count('anuncio', 'owner_id = :owner_id AND status_id = :erro', ['owner_id' => $id, ':erro' => 3]);
+        //return $accs;
     }
     
     public static function AnunciosAnunciadoByOwner($id,$start = null,$len = null,$search = null){
@@ -96,10 +123,14 @@ class Anuncio{
         return $accs;
     }
     
-    public static function AnunciosCountAnunciadoByOwner($id){
+    public static function AnunciosCountAnunciadoByOwner($id,$search = null){
+        
         $result = array();
-        $accs = R::count('anuncio', 'owner_id = :owner_id AND status_id = :anunciado', ['owner_id' => $id, ':anunciado' => 2]);
-        return $accs;
+        if (isset($search)){
+            return R::count('anuncio', 'owner_id = :owner_id AND status_id = :anunciado AND titulo LIKE :titulo', [':titulo'=> '%'.$search.'%','owner_id' => $id, ':anunciado' => 2]);
+        }else{
+            return R::count('anuncio', 'owner_id = :owner_id AND status_id = :anunciado', ['owner_id' => $id, ':anunciado' => 2]);
+        }
     }
     
     public static function AnunciosCountByOwner($id){

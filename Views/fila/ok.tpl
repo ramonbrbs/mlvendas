@@ -1,30 +1,32 @@
 {include file="header.tpl"}
-<div class='container'>
+<div class='container' >
     <h2>Anúncios Realizados</h2>
-<table>
+<table id='example'>
     <thead>
         <tr>
             <th>Título</th>
             <th>SKU</th>
             <th>Conta ML</th>
+            <th>Link</th>
         </tr>
     </thead>
-    <tbody>
-        {foreach $anuncios as $anuncio }
-            <tr>
-                <td><a href="{$anuncio->permalink}"> {$anuncio->titulo} </a></td>
-                <td>{$anuncio->SKU}</td>
-                <td>{$anuncio->mlaccount->nickname}</td>
-            </tr>
-        {/foreach}
-    </tbody>
+
 </table>
 </div>
 
 <script>
-    
-$(document).ready(function(){
-    $('table').DataTable();
-});
+  $(document).ready(function() {
+    $('#example').DataTable( {
+        "serverSide": true,
+        "processing": true,
+        ajax: {
+            url: '{$Controller_Fila}/OkAjax'
+            //dataFilter: function(data){
+                //console.log(data);
+            //}
+        }
+        
+    } );
+} );
 </script>
 {include file="footer.tpl"}

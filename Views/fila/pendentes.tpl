@@ -1,7 +1,7 @@
 {include file="header.tpl"}
 <div class='container'>
     <h2>Anúncios Pendentes na Fila</h2>
-<table>
+<table id="example">
     <thead>
         <tr>
             <th>Título</th>
@@ -22,9 +22,18 @@
 </div>
 
 <script>
-    
-$(document).ready(function(){
-    $('table').DataTable();
-});
+  $(document).ready(function() {
+    $('#example').DataTable( {
+        "serverSide": true,
+        "processing": true,
+        ajax: {
+            url: '{$Controller_Fila}/PendentesAjax'
+            //dataFilter: function(data){
+                //console.log(data);
+            //}
+        }
+        
+    } );
+} );
 </script>
 {include file="footer.tpl"}

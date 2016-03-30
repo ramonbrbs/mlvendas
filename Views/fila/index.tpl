@@ -5,7 +5,7 @@
     $('#example').DataTable( {
         "serverSide": true,
         ajax: {
-            url: 'https://vendasml-ramonbrbs.c9users.io/fila/PendentesAjax'
+            url: '{$Controller_Fila}/PendentesAjax'
             //dataFilter: function(data){
                 //console.log(data);
             //}

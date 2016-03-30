@@ -31,17 +31,17 @@ class Fila extends Controller{
         $search = $_GET['search']['value'];
         $start = $_GET['start'];
         $len = $_GET['length'];
-        $a = new Anuncio();
+        $anun = new Anuncio();
         
         $data = array();
-        $anuncios =  $a->AnunciosPendentesByOwner($_SESSION[SESSION_USER]->id,$start,$len,$search);
+        $anuncios =  $anun->AnunciosPendentesByOwner($_SESSION[SESSION_USER]->id,$start,$len,$search);
         foreach($anuncios as $a){
             $data[] = [$a->titulo, $a->sku,$a->mlaccount->nickname];
         }
         $response = array();
         $response['data'] = $data;
-        $response['recordsTotal'] = $a->AnunciosCountPendentesByOwner($_SESSION[SESSION_USER]->id);
-        $response['recordsFiltered'] = count($anuncios);
+        $response['recordsTotal'] = $anun->AnunciosCountPendentesByOwner($_SESSION[SESSION_USER]->id);
+        $response['recordsFiltered'] = $anun->AnunciosCountPendentesByOwner($_SESSION[SESSION_USER]->id, $search);
         $response['draw'] = (integer)$_GET['draw'];
        echo(json_encode($response));
         //echo('{ "draw": 1, "recordsTotal": 57, "recordsFiltered": 57, "data": [ [ "Angelica", "Ramos", "System Architect" ] ] }');
@@ -51,17 +51,19 @@ class Fila extends Controller{
         $search = $_GET['search']['value'];
         $start = $_GET['start'];
         $len = $_GET['length'];
-        $a = new Anuncio();
+        $anun = new Anuncio();
         
         $data = array();
-        $anuncios =  $a->AnunciosAnunciadoByOwner($_SESSION[SESSION_USER]->id,$start,$len,$search);
+        $anuncios =  $anun->AnunciosAnunciadoByOwner($_SESSION[SESSION_USER]->id,$start,$len,$search);
         foreach($anuncios as $a){
-            $data[] = [$a->titulo, $a->sku,$a->mlaccount->nickname];
+            $data[] = [$a->titulo, $a->sku,$a->mlaccount->nickname, $a->permalink];
         }
         $response = array();
         $response['data'] = $data;
-        $response['recordsTotal'] = 500;
-        $response['recordsFiltered'] = 500;
+        
+        $response['recordsTotal'] = $anun->AnunciosCountAnunciadoByOwner($_SESSION[SESSION_USER]->id);
+        
+        $response['recordsFiltered'] = $anun->AnunciosCountAnunciadoByOwner($_SESSION[SESSION_USER]->id, $search);        ////esponse['recordsFiltered'] = count($anuncios);
         $response['draw'] = (integer)$_GET['draw'];
        echo(json_encode($response));
     }
@@ -73,10 +75,32 @@ class Fila extends Controller{
         $this->Render();
     }
     
+    public function ErrorAjax(){
+        $search = $_GET['search']['value'];
+        $start = $_GET['start'];
+        $len = $_GET['length'];
+        $anun = new Anuncio();
+        
+        $data = array();
+        $anuncios =  $anun->AnunciosErroByOwner($_SESSION[SESSION_USER]->id,$start,$len,$search);
+        foreach($anuncios as $a){
+            $data[] = [$a->titulo, $a->sku,$a->mlaccount->nickname, $a->error];
+        }
+        $response = array();
+        $response['data'] = $data;
+        
+        $response['recordsTotal'] = $anun->AnunciosCountErroByOwner($_SESSION[SESSION_USER]->id);
+        
+        $response['recordsFiltered'] = $anun->AnunciosCountErroByOwner($_SESSION[SESSION_USER]->id, $search);        ////esponse['recordsFiltered'] = count($anuncios);
+        $response['draw'] = (integer)$_GET['draw'];
+       echo(json_encode($response));
+    }
+    
+    
     public function Ok(){
         $this->ViewFile = 'fila__ok';
-        $a = new Anuncio();
-        $this->Context['anuncios'] = $a->AnunciosAnunciadoByOwner($_SESSION[SESSION_USER]->id);
+        //$a = new Anuncio();
+        ////$this->Context['anuncios'] = $a->AnunciosAnunciadoByOwner($_SESSION[SESSION_USER]->id);
         $this->Render();
     }
     
