@@ -1,31 +1,7 @@
 {include file="header.tpl"}
 
-<script>
-  $(document).ready(function() {
-    $('#example').DataTable( {
-        "serverSide": true,
-        ajax: {
-            url: '{$Controller_Fila}/PendentesAjax'
-            //dataFilter: function(data){
-                //console.log(data);
-            //}
-        }
-        
-    } );
-} );
-</script>
 
 
-<table id="example">
-    <thead>
-        <tr>
-            <th>Título</th>
-            <th>SKU</th>
-            <th>Conta ML</th>
-        </tr>
-    </thead>
-    
-</table>
 
 
 <div class='container'>
