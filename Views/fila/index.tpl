@@ -16,10 +16,11 @@
       <span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Erros ({$anuncios_erro})
     </button>
   </a>
-  
+  <a href='{$Controller_Fila}/Pendentes'>
     <button type="button" class="btn btn-primary btn-lg">
       <span class="glyphicon glyphicon-inbox" aria-hidden="true"></span> Pendentes ({$anuncios_pendentes})
     </button>
+  </a>
 </div>
 
 
