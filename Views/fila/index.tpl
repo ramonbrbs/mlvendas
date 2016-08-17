@@ -1,8 +1,38 @@
 {include file="header.tpl"}
 
 
+<div class='container'>
+    <h2>Anúncios Realizados</h2>
+<table id='example'>
+    <thead>
+        <tr>
+            <th>Arquivo</th>
+            <th>Conta ML</th>
+            <th>Anunciados</th>
+            <th>Com erro</th>
+            <th>Pendentes</th>
+            
+        </tr>
+    </thead>
+    <tbody>
+      {foreach $arquivosConta as $a }
+        <tr id="{$a.mlaccount_id}">
+          <td><a href="{$Controller_Fila}/Arquivo/{$a.file|escape:'url'}/{$a.mlaccount_id}"> {$a.file} </a></td>
+          <td>{$a.nickname}</td>
+          <td>{$a.anunciado}</td>
+          <td>{$a.erro}</td>
+          <td>{$a.pendente}</td>
+        </tr>
+      {/foreach}
+    </tbody>
+</table>
+</div>
 
-
+<script>
+$(document).ready(function() {
+    $('#example').DataTable();
+} );
+</script>
 
 <div class='container'>
   <a href='{$Controller_Fila}/Ok'>

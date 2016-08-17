@@ -10,6 +10,7 @@ require_once(__DIR__.'/Libs/MercadoLivre/meli.php');
 require_once(__DIR__.'/Libs/RedBean/setup.php');
 set_time_limit(0);
 
+R::debug();
 
 
 $running = R::getAll('SELECT DISTINCT pid FROM anuncio where status_id = 1');
@@ -81,18 +82,29 @@ echo "2";
 
 $contasPendentes = R::getAll( 'SELECT DISTINCT mlaccount_id FROM anuncio WHERE status_id = 1' );
 
+$stringPendentes = '(';
+echo "pt2\n";
+var_dump($stringPendentes);
 foreach($contasPendentes as $k =>$c){
-    
+    echo("pt4\n");
+    var_dump($contasPendentes);
+    echo("pt4\n");
     $date1 = date('"Y-m-d H:i:s"',strtotime('-24 hours'));
     $date2 = date("Y-m-d H:i:s");
     $anuncios_ultimas_24 = R::count('anuncio', 'mlaccount_id = :mlaccount AND datepost BETWEEN :date1 AND :date2', array(':mlaccount' => $c['mlaccount_id'], ':date1' => $date1, ':date2'=> $date2));
     if($anuncios_ultimas_24 > MAX_ANUN_DAY){
+        echo "unsetou";
         unset($contasPendentes[$k]);
+    }else{
+        $stringPendentes =  $stringPendentes . $c .',';
+        echo "-asdasd";
+        var_dump($stringPendentes);
     }
 }
-
+$stringPendentes = rtrim($stringPendentes, ",");
+$stringPendentes = $stringPendentes . ")";
 $time = time();
-R::exec("UPDATE anuncio SET pid=$time WHERE status_id = 1 ORDER BY RAND() LIMIT 1000");
+R::exec("UPDATE anuncio SET pid=$time WHERE status_id = 1 AND mlaccount_id IN ".$stringPendentes." ORDER BY RAND() LIMIT 1000");
 echo "1";
 $anuncios = R::find('anuncio', "pid = $time");
 
