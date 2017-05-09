@@ -12,6 +12,33 @@ require_once(__DIR__.'/../Libs/PhpExcel/PHPExcel/IOFactory.php');
 
 class Fila extends Controller{
     
+    function Copia(){
+        $this->ViewFile = 'fila__copiaconta';
+        $this->Context['accounts'] = MLAccount::AccountsByOwner($_SESSION[SESSION_USER]->id);
+        if(!empty($_POST)){
+            $contade = $_POST['mlaccountDe'];
+            $contapara = $_POST['mlaccountPara'];
+            $errors = array();
+            if($_POST['mlaccountDe'] ==$_POST['mlaccountPara']){
+                $errors[] = "Não é possível copiar para a mesma conta";
+            }
+            
+            if(R::findOne('copiaconta', 'contade = ? AND contapara = ? AND status_id != ? ',[$contade, $contapara, 2]) != null){
+                $errors[] = "Esta migração de anúncios já está sendo realizada";
+            }
+            R::debug(false);
+            if(empty($errors)){
+                
+                $copia = R::dispense('copiaconta');
+                $copia->contade = $_POST['mlaccountDe'];
+                $copia->contapara = $_POST['mlaccountPara'];
+                $copia->status = R::load('statusanuncio',1);
+                R::store($copia);
+            }
+        }$this->Context['errors'] = $errors;
+        $this->Render();
+    }
+    
     function __construct(){
         
         parent::__construct();

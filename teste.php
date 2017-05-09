@@ -1,5 +1,7 @@
 <?php
 
+/*
+
 require(__DIR__.'/Entity/StatusAnuncio.php');
 require(__DIR__.'/Entity/Anuncio.php');
 require(__DIR__.'/Entity/MLAccount.php');
@@ -15,3 +17,8 @@ $a->num_letras = 23;
 
 //$acc = R::find('anuncio', 'status_id = 3 LIMIT 0,100');
 //var_dump($acc);
+
+*/
+$var->oi = 123;
+$var->sim = 222;
+echo $var->oi;

@@ -70,6 +70,22 @@ class MLAccount{
         $this->Save();
     }
     
+    public function GetListAnuncio($status, $offset, $query){
+        $retorno = array();
+        $this->checkRefreshToken();
+        $meli = $this->getMeli();
+        $params = array('access_token' => $this->access_token, 'status' => $status, 'limit' => 20);
+        if(! empty($query)){
+            $params['query'] = $query;
+        }
+        $result = $meli->get("/users/$this->userid/items/search", $params);
+        if ($result['httpCode'] == 200){
+            $retorno['total'] = $result['body']->paging->total;
+            $retorno['results'] = $result['body']->results;
+        }
+        return $retorno;
+    }
+    
     public static function AccountsByOwner($id){
         $result = array();
         $accs = R::find('mlaccount', 'owner_id = :owner_id', ['owner_id' => $id]);

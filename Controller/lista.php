@@ -1,0 +1,41 @@
+<?php
+require_once(__DIR__.'/../Framework/Controller.php');
+require_once(__DIR__.'/../Framework/Auth.php');
+require_once(__DIR__.'/../Framework/Constant.php');
+require_once(__DIR__.'/../Entity/User.php');
+require_once(__DIR__.'/../Entity/Anuncio.php');
+require_once(__DIR__.'/../Entity/MLAccount.php');
+require_once(__DIR__.'/../Entity/StatusAnuncio.php');
+require_once(__DIR__.'/../settings.php');
+require_once(__DIR__.'/../Libs/MercadoLivre/meli.php');
+require_once(__DIR__.'/../Libs/PhpExcel/PHPExcel/IOFactory.php');
+
+$meli = new Meli(ML_APP_ID, ML_APP_SECRET_KEY);
+class Lista extends Controller{
+    
+    function __construct(){
+        
+        parent::__construct();
+        $this->Context['accounts'] = MLAccount::AccountsByOwner($_SESSION[SESSION_USER]->id);
+        $a = new Anuncio();
+        $this->Context['anuncios_pendentes_count'] = $a->AnunciosCountPendentesByOwner($_SESSION[SESSION_USER]->id);
+    }
+    
+    public function SelecionarConta(){
+        $this->ViewFile = 'lista__selecionarconta';
+        $this->render();
+    }
+    
+    public function Busca($status){
+        $this->ViewFile = 'lista__busca';
+        $this->Context['statuses'] = [''];
+        $conta = $_GET['conta'];
+        //$status = $_GET['status']; //pending , active, paused, closed
+        $page = $_GET['page'];
+        $query = $_GET['query'];
+        $offset = ($page - 1) * 20;
+        $acc = new MLAccount();
+        $acc->Load($conta);
+        var_dump($acc->GetListAnuncio($status, $offset, $query));
+    }
+}

@@ -33,6 +33,7 @@
             <li><a href="#">Fila de Envios</a></li>
             <li><a href="#">Histórico</a></li>
             <li><a href="#">Erros</a></li>
+            <li><a href="{$Controller_Fila}/Copia">Copiar Anuncios de Conta</a></li>
             <li class="divider"></li>
             <li><a href="{$Controller_Fila}/upload">Adicionar Arquivo na Fila</a></li>
             <!--<li class="divider"></li>

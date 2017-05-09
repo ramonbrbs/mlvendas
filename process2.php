@@ -70,17 +70,24 @@ function resolverCategoria($categorias){
 //$anuncios_pendentes = R::find('anuncio', 'status_id = :id', array(':id' => $status_pendente->id));
 
 function retornarFotos($a){
-    $retorno = array();
-    for($i = 1; $i<=6;$i++){
-        if (isset($a->{'foto'.$i})){
-            $retorno[] = array('source' => $a->{'foto'.$i} );
+    try {
+        $retorno = array();
+        for($i = 1; $i<=6;$i++){
+            if (isset($a->{'foto'.$i})){
+                $retorno[] = array('source' => $a->{'foto'.$i} );
+            }
         }
+        return $retorno;
+        
+    } catch (Exception $e) {
+        throw $e;
     }
-    return $retorno;
+    
 }
 echo "2";
 
-$contasPendentes = R::getAll( 'SELECT DISTINCT mlaccount_id FROM anuncio WHERE status_id = 1' );
+try {
+    $contasPendentes = R::getAll( 'SELECT DISTINCT mlaccount_id FROM anuncio WHERE status_id = 1');
 
 $stringPendentes = '(';
 echo "pt2\n";
@@ -163,3 +170,7 @@ foreach($anuncios as $a){
         }
         //exit();
 }
+} catch (Exception $ex) {
+    file_put_contents('log_processa_pagina.txt', $ex , FILE_APPEND);
+}
+

@@ -26,10 +26,13 @@ class Anuncio{
     public $erro;
     public $categoriaid;
     public $file;
+    public $fretereal;
     
     public $mlaccount;
     public $owner;
     public $status;
+    
+    
     
     
     public function Save(){
@@ -160,6 +163,7 @@ class Anuncio{
         $this->mlaccount = $u->mlaccount;
         $this->owner = $u->owner;
         $this->status = $u->status;
+        $this->fretereal = $u->fretereal;
     }
     
     private function translateToBD(){
@@ -186,6 +190,7 @@ class Anuncio{
         $u->frete_gratis = $this->frete_gratis;
         $u->norte_nordeste = $this->norte_nordeste;
         $u->file = $this->file;
+        $u->fretereal = $this->fretereal;
         
         $owner = new User();
         $owner->load($this->owner);
