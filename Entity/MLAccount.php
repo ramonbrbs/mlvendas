@@ -82,6 +82,12 @@ class MLAccount{
         if ($result['httpCode'] == 200){
             $retorno['total'] = $result['body']->paging->total;
             $retorno['results'] = $result['body']->results;
+          $retorno["items"] =[];
+          
+        }
+      foreach($result["body"] as $mlid
+      {
+        array_push($retorno["items"], $meli->get("items/$mlid"));
         }
         return $retorno;
     }
