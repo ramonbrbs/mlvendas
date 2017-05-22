@@ -40,6 +40,15 @@
             <li><a href="#">One more separated link</a></li>-->
           </ul>
         </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Listagem <span class="caret"></span></a>
+          <ul class="dropdown-menu" role="menu">
+            <li><a href="{$Controller_Lista}/SelecionarConta?status=pending">Pendentes</a></li>
+            <li><a href="{$Controller_Lista}/SelecionarConta?status=active">Ativos</a></li>
+            <li><a href="{$Controller_Lista}/SelecionarConta?status=closed">Cancelados</a></li>
+            <li><a href="{$Controller_Lista}/SelecionarConta?status=paused">Pausados</a></li>
+          </ul>
+        </li>
       </ul>
       
       

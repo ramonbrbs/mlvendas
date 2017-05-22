@@ -23,19 +23,32 @@ class Lista extends Controller{
     
     public function SelecionarConta(){
         $this->ViewFile = 'lista__selecionarconta';
+        $this->Context['status'] = $_GET['status'];
         $this->render();
     }
     
-    public function Busca($status){
+    public function Busca(){
         $this->ViewFile = 'lista__busca';
         $this->Context['statuses'] = [''];
         $conta = $_GET['conta'];
-        //$status = $_GET['status']; //pending , active, paused, closed
+        //$status = $_GET['status']; //pending , active, paused, closed//
         $page = $_GET['page'];
         $query = $_GET['query'];
+        if(empty($_GET['page'])){
+            $page = 1;
+        }
         $offset = ($page - 1) * 20;
         $acc = new MLAccount();
         $acc->Load($conta);
-        var_dump($acc->GetListAnuncio($status, $offset, $query));
+        
+        $status = $_GET['status'];
+        $resultado = $acc->GetListAnuncio($status, $offset, $query);
+        
+        $this->Context['itens'] = $resultado['items'];
+        $this->Context['total'] = $resultado['total'];
+        $this->Context['qtd_pags'] = ceil($resultado['total'] / 20);
+        $this->Context['conta'] = $conta;
+        $this->Context['status'] = $status;
+        $this->render();
     }
 }

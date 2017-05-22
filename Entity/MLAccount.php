@@ -81,14 +81,17 @@ class MLAccount{
         $result = $meli->get("/users/$this->userid/items/search", $params);
         if ($result['httpCode'] == 200){
             $retorno['total'] = $result['body']->paging->total;
-            $retorno['results'] = $result['body']->results;
-          $retorno["items"] =[];
-          
+            $ids_anuncios = $result['body']->results;
+            $retorno["items"] = [];
         }
-      foreach($result["body"] as $mlid
+        
+      foreach($ids_anuncios as $mlid)
       {
-        array_push($retorno["items"], $meli->get("items/$mlid"));
-        }
+         $params = array('access_token' => $this->access_token);
+         $info = $meli->get("items/$mlid", $params);
+         array_push($retorno["items"],$info['body']);
+          
+      }
         return $retorno;
     }
     

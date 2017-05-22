@@ -33,6 +33,7 @@
 <input class="btn btn-primary" type="submit" value="Selecionar" />
 </div>
 
-
+<input type='hidden' value='{$status}' name='status'/>
+<input type='hidden' value='1' name='page'/>
 </form>
 {include file="footer.tpl"}
