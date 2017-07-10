@@ -70,13 +70,16 @@ class MLAccount{
         $this->Save();
     }
     
-    public function GetListAnuncio($status, $offset, $query){
+    public function GetListAnuncio($status, $offset, $sku, $descricao){
         $retorno = array();
         $this->checkRefreshToken();
         $meli = $this->getMeli();
         $params = array('access_token' => $this->access_token, 'status' => $status, 'limit' => 20);
         if(! empty($query)){
             $params['query'] = $query;
+        }
+        if(!empty($offset)){
+            $params['offset'] = $offset;
         }
         $result = $meli->get("/users/$this->userid/items/search", $params);
         if ($result['httpCode'] == 200){

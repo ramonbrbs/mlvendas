@@ -28,6 +28,16 @@ class Anuncio{
     public $file;
     public $fretereal;
     
+    //novos
+    public $condicao;
+    public $garantia;
+    public $marca;
+    public $modelo;
+    public $codbar;
+    public $foto7;
+    public $foto8;
+    
+    
     public $mlaccount;
     public $owner;
     public $status;
@@ -155,6 +165,8 @@ class Anuncio{
         $this->foto4 = $u->foto4;
         $this->foto5 = $u->foto5;
         $this->foto6 = $u->foto6;
+        $this->foto7 = $u->foto7;
+        $this->foto8 = $u->foto8;
         $this->youtube = $u->youtube;
         $this->tipo = $u->tipo;
         $this->frete_gratis = $u->frete_gratis;
@@ -164,6 +176,11 @@ class Anuncio{
         $this->owner = $u->owner;
         $this->status = $u->status;
         $this->fretereal = $u->fretereal;
+        $this->condicao = $u->condicao;
+        $this->garantia = $u->garantia;
+        $this->marca = $u->marca;
+        $this->modelo = $u->modelo;
+        $this->codbar = $u->codbar;
     }
     
     private function translateToBD(){
@@ -185,12 +202,19 @@ class Anuncio{
         $u->foto4 = $this->foto4;
         $u->foto5 = $this->foto5;
         $u->foto6 = $this->foto6;
+        $u->foto7 = $this->foto7;
+        $u->foto8 = $this->foto8;
         $u->youtube = $this->youtube;
         $u->tipo = $this->tipo;
         $u->frete_gratis = $this->frete_gratis;
         $u->norte_nordeste = $this->norte_nordeste;
         $u->file = $this->file;
         $u->fretereal = $this->fretereal;
+        $u->condicao = $this->condicao;
+        $u->garantia = $this->garantia;
+        $u->marca = $this->marca;
+        $u->modelo = $this->modelo;
+        $u->codbar = $this->codbar;
         
         $owner = new User();
         $owner->load($this->owner);

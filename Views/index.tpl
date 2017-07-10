@@ -17,7 +17,7 @@
         <label for="login" class="sr-only">Nome de Usuário</label>
         <input type="text" id="login" name='login' class="form-control" placeholder="Nome de Usuário" value='{(isset($_post_login))?$_post_login:''}' required autofocus>
         <label for="plainPassword" class="sr-only">Senha</label>
-        <input type="password" name='plainPassword' id="plainPassword" class="form-control" placeholder="Senha" required>
+        <input type="password" name='plainPassword'  class="form-control" placeholder="Senha" required>
         
         <button class="btn btn-lg btn-primary btn-block" type="submit" >Entrar</button>
       </form>

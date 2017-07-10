@@ -1,10 +1,19 @@
 {include file="header.tpl"}
 
+<div class='container'>
+    {foreach $alerts as $alert}
+    <div class="alert alert-{$alert@key}">
+      <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+      {$alert}
+    </div>
+    {/foreach}
+</div>
+
 {if $errors}
 <div class="alert alert-danger">
 {foreach $errors as $e}
 
-  <p>$e</p>
+  <p>{$e}</p>
 
 {/foreach}
 </div>

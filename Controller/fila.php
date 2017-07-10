@@ -171,13 +171,10 @@ class Fila extends Controller{
             $f = $_FILES;
             for($i = 0; $i< count($_FILES['file']['name']);$i++){
                 $nomeArquivo = $f['file']['name'][$i];
-                if (R::count('anuncio', 'mlaccount_id = :mlAccount AND file = :nomeArquivo LIMIT 1', array(':mlAccount' => $mlAccount, ':nomeArquivo' => $nomeArquivo)) > 0){
-                    $errors[] = "Arquivo já enviado para esta conta (Arquivo [$nomeArquivo] - Conta [$mlAccount]";
-                }else{
                     $objPHPExcel = PHPExcel_IOFactory::load($f['file']['tmp_name'][$i]);
             
                     $sheetData = $objPHPExcel->getActiveSheet()->toArray(null,true,true,true);
-                    for ( $j=1;$j<4;$j++){
+                    for ( $j=1;$j<5;$j++){
                         unset($sheetData[$i]);
                     }
                     foreach($sheetData as $item){
@@ -186,20 +183,26 @@ class Fila extends Controller{
                             $anuncio->sku = $item['A'];
                             $anuncio->titulo = $item['B'];
                             $anuncio->num_letras = $item['C'];
-                            $anuncio->categoria = $item['D'];
-                            $anuncio->descricao = $item['E'];
-                            $anuncio->preco = $item['F'];
-                            $anuncio->estoque = $item['G'];
-                            $anuncio->foto1 = $item['H'];
-                            $anuncio->foto2 = $item['I'];
-                            $anuncio->foto3 = $item['J'];
-                            $anuncio->foto4 = $item['K'];
-                            $anuncio->foto5 = $item['L'];
-                            $anuncio->foto6 = $item['M'];
-                            $anuncio->youtube = $item['N'];
-                            $anuncio->tipo = $item['O'];
-                            $anuncio->frete_gratis = $item['P'];
-                            $anuncio->norte_nordeste = $item['Q'];
+                            $anuncio->categoria = $item['E'];
+                            $anuncio->descricao = $item['F'];
+                            $anuncio->preco = $item['G'];
+                            $anuncio->estoque = $item['H'];
+                            $anuncio->garantia = $item['N'];
+                            $anuncio->marca = $item['P'];
+                            $anuncio->codbar = $item['R'];
+                            $anuncio->modelo = $item['Q'];
+                            $anuncio->foto1 = $item['S'];
+                            $anuncio->foto2 = $item['T'];
+                            $anuncio->foto3 = $item['U'];
+                            $anuncio->foto4 = $item['V'];
+                            $anuncio->foto5 = $item['W'];
+                            $anuncio->foto6 = $item['X'];
+                            $anuncio->foto7 = $item['Y'];
+                            $anuncio->foto8 = $item['Z'];
+                            $anuncio->youtube = $item['O'];
+                            $anuncio->tipo = $item['I'];
+                            $anuncio->frete_gratis = $item['K'];
+                            $anuncio->norte_nordeste = $item['L'];
                             $anuncio->status = StatusAnuncio::STATUS_PENDENTE;
                             $anuncio->owner = $_SESSION[SESSION_USER]->id;
                             $anuncio->mlaccount = $_POST['mlaccount'];
@@ -208,7 +211,7 @@ class Fila extends Controller{
                         }
                         
                     }
-                }
+                
             }
             
             
@@ -253,6 +256,7 @@ class Fila extends Controller{
                 }
                 
             }
+            $this->Context['alerts'] = ['success' => 'Anúncios adicionados à fila'];
             //var_dump($sheetData);
             
             

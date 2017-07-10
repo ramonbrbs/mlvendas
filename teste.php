@@ -19,6 +19,4 @@ $a->num_letras = 23;
 //var_dump($acc);
 
 */
-$var->oi = 123;
-$var->sim = 222;
-echo $var->oi;
+phpinfo();
