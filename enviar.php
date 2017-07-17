@@ -46,6 +46,7 @@ try{
             
             $anuncio = array();
                 $anuncio['title'] = $a->titulo;
+                $anuncio['seller_custom_field'] = $a->sku;
                 $anuncio['category_id'] = $a->categoria;
                 $anuncio['description'] = $a->descricao;
                 $anuncio['price'] = $a->preco;
@@ -65,11 +66,14 @@ try{
                 $anuncio['attributes'] = array();
                 
                 if(!empty($a->modelo)){
-                    $anuncio['attributes'][] = new Attribute("MODEL", $a->model);
+                    $anuncio['attributes'][] = new Attribute("MODEL", $a->modelo);
                 }
                 
                 if(!empty($a->marca)){
                     $anuncio['attributes'][] = new Attribute("BRAND", $a->marca);
+                }
+                if(!empty($a->codbar)){
+                    $anuncio['attributes'][] = new Attribute("EAN", $a->codbar);
                 }
                 
                 if(strtoupper($a->frete_gratis) == 'SIM'){
@@ -78,6 +82,13 @@ try{
                     $anuncio['shipping']['free_methods'] = array();
                     $anuncio['shipping']['free_methods'][0]['id'] = 100009;
                     $anuncio['shipping']['free_methods'][0]['rule'] = array('free_mode'=>'country', 'value'=>null);
+                }elseif(true) {
+                    
+                    $anuncio['shipping']= array();
+                    $anuncio['shipping']['free_shipping'] = true;
+                    $anuncio['shipping']['free_methods'] = array();
+                    $anuncio['shipping']['free_methods'][0]['id'] = 100009;
+                    $anuncio['shipping']['free_methods'][0]['rule'] = array('free_mode'=>'exclude_region', 'value'=>array('BR-NO','BR-NE'));
                 }
                 $accML = new MLAccount();
                 
